@@ -1,13 +1,15 @@
 package example
 
-import "fmt"
+import (
+	"fmt"
+)
 import _ "embed"
 
 //go:embed "/README.md"
 var version string
 
 type number interface {
-	int | float32 | float64
+	~int | ~float32 | ~float64
 }
 
 type Person[T number] struct {
@@ -15,8 +17,8 @@ type Person[T number] struct {
 	age  T
 }
 
-func (app *Person[T]) class(s T) string {
-	return "wpc"
+func (app *Person[T]) class(t, s T) T {
+	return t / s
 }
 
 type apple struct {
